@@ -13,6 +13,11 @@
             {{ $post->title }}
         </h1>
         <p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit</a>]</p>
+        <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">
+         @csrf
+        @method('DELETE')
+        <button type="submit">delete</button> 
+        </form>
         <div class="content">
             <div class="content__post">
                 <h3>本文</h3>
@@ -22,5 +27,12 @@
         <div class="footer">
             <a href="/">戻る</a>
         </div>
+        <script>
+        function deletePost(e) {
+            'use strict';
+            if (confirm('削除すると復元できません。\n本当に削除しますか？'))　{
+                document.getElementByID('form_delete').submit();
+            }
+         }
     </body>
 </html>
